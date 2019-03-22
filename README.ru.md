@@ -1,4 +1,4 @@
-# @funbox/package
+# @funboxteam/languagetool-node
 
 ## Описание
 
