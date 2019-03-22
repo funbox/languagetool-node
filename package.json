@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "eslint --cache ./",
+    "postinstall": "node install.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,5 +34,15 @@
         "git add"
       ]
     }
+  },
+  "dependencies": {
+    "axios": "0.18.0",
+    "deepmerge": "3.2.0",
+    "node-stream-zip": "1.8.0",
+    "ora": "3.4.0",
+    "progress": "2.0.3",
+    "vfile": "4.0.0",
+    "vfile-location": "2.0.4",
+    "vfile-reporter": "5.1.1"
   }
 }

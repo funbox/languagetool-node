@@ -67,3 +67,7 @@ Session.vim
 
 # -- ESLint --
 .eslintcache
+
+
+# -- Other --
+/languagetool
