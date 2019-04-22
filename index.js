@@ -2,6 +2,7 @@
 
 const deepmerge = require('deepmerge');
 const fs = require('fs');
+const os = require('os');
 const ora = require('ora');
 const path = require('path');
 const reporter = require('vfile-reporter');
@@ -17,7 +18,7 @@ const { error } = require('./lib/logSymbols');
 /* eslint-disable import/no-dynamic-require */
 const configName = '.languagetoolrc.js';
 const defaultConfig = require(`./${configName}`);
-const externalConfigPath = path.join(process.cwd(), '.languagetoolrc.js');
+const externalConfigPath = path.join(os.homedir(), '.languagetoolrc.js');
 const appConfig = fs.existsSync(externalConfigPath)
   ? deepmerge(defaultConfig, require(externalConfigPath))
   : defaultConfig;
