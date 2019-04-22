@@ -26,7 +26,7 @@ const processArgs = process.argv.slice(2);
 
 let files = [];
 
-if (!process.stdin.isTTY) {
+if (!process.stdin.isTTY && process.platform !== 'win32') {
   // STDIN
   files.push(createVfile());
 } else {
