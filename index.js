@@ -9,6 +9,7 @@ const reporter = require('vfile-reporter');
 const createVfile = require('./lib/createVfile');
 const filterMatches = require('./lib/filterMatches');
 const generateReport = require('./lib/generateReport');
+const getFilesByPath = require('./lib/getFilesByPath');
 const getMatches = require('./lib/getMatches');
 const languageTool = require('./lib/languageTool');
 const { error } = require('./lib/logSymbols');
@@ -24,6 +25,7 @@ const appConfig = fs.existsSync(externalConfigPath)
 
 const processArgs = process.argv.slice(2);
 
+const dirs = processArgs.filter(p => fs.existsSync(p) && fs.statSync(p).isDirectory());
 let files = [];
 
 if (!process.stdin.isTTY && process.platform !== 'win32') {
@@ -31,7 +33,8 @@ if (!process.stdin.isTTY && process.platform !== 'win32') {
   files.push(createVfile());
 } else {
   files = processArgs
-    .filter(file => fs.existsSync(file) && fs.statSync(file).isFile())
+    .filter(file => /.+\.(md|txt)$/i.test(file) && fs.existsSync(file) && fs.statSync(file).isFile())
+    .concat(...(dirs.map(d => getFilesByPath(d))))
     .map(createVfile);
 }
 
