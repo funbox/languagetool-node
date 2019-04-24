@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const axios = require('axios');
 const deepmerge = require('deepmerge');
 const fs = require('fs');
 const os = require('os');
@@ -7,18 +8,22 @@ const ora = require('ora');
 const path = require('path');
 const reporter = require('vfile-reporter');
 
+const checkJavaInstalled = require('./lib/checkJavaInstalled');
 const createVfile = require('./lib/createVfile');
-const filterMatches = require('./lib/filterMatches');
 const generateReport = require('./lib/generateReport');
-const getFilesByPath = require('./lib/getFilesByPath');
-const getMatches = require('./lib/getMatches');
-const languageTool = require('./lib/languageTool');
-const { error } = require('./lib/logSymbols');
+const { error, info } = require('./lib/log');
+const startLanguageToolServer = require('./lib/startLanguageToolServer');
+
+if (!checkJavaInstalled()) {
+  error('To use this command-line tool you need to install a JDK.');
+  info('Please visit the Java Developer Kit download website: https://www.java.com');
+  process.exit(1);
+}
 
 /* eslint-disable import/no-dynamic-require */
 const configName = '.languagetoolrc.js';
 const defaultConfig = require(`./${configName}`);
-const externalConfigPath = path.join(os.homedir(), '.languagetoolrc.js');
+const externalConfigPath = path.join(os.homedir(), configName);
 const appConfig = fs.existsSync(externalConfigPath)
   ? deepmerge(defaultConfig, require(externalConfigPath))
   : defaultConfig;
@@ -26,16 +31,15 @@ const appConfig = fs.existsSync(externalConfigPath)
 
 const processArgs = process.argv.slice(2);
 
-const dirs = processArgs.filter(p => fs.existsSync(p) && fs.statSync(p).isDirectory());
 let files = [];
 
 if (!process.stdin.isTTY && process.platform !== 'win32') {
-  // STDIN
+  // When Git BASH terminal is used we can't get data from STDIN.
+  // That's why it's turned off here, and it's impossible to use STDIN in Windows.
   files.push(createVfile());
 } else {
   files = processArgs
-    .filter(file => /.+\.(md|txt)$/i.test(file) && fs.existsSync(file) && fs.statSync(file).isFile())
-    .concat(...(dirs.map(d => getFilesByPath(d))))
+    .filter(file => fs.existsSync(file))
     .map(createVfile);
 }
 
@@ -47,18 +51,26 @@ async function check(vfiles) {
   const spinner = ora('Processing...').start();
 
   try {
-    const { port } = await languageTool(
-      path.resolve(__dirname, 'languagetool', process.platform === 'win32' ? 'run-server.bat' : 'run-server.sh'),
-    );
+    const { port } = await startLanguageToolServer();
 
     // eslint-disable-next-line no-restricted-syntax
     for (const vfile of vfiles) {
       // eslint-disable-next-line no-await-in-loop
-      const matches = await getMatches({
+      const matches = await axios({
         url: `http://127.0.0.1:${port}/v2/check`,
-        text: String(vfile.contents),
+        method: 'post',
+        params: {
+          language: 'auto',
+          text: String(vfile.contents),
+        },
+      }).then(response => response.data.matches);
+
+      const filteredMatches = matches.filter(match => {
+        const ctx = match.context;
+        const badWord = ctx.text.slice(ctx.offset, ctx.offset + ctx.length);
+
+        return appConfig.ignore.some(goodWord => !RegExp(`^${goodWord}$`, 'i').test(badWord));
       });
-      const filteredMatches = filterMatches({ matches, whitelist: appConfig.ignore });
 
       if (filteredMatches.length) {
         generateReport({ matches: filteredMatches, vfile });

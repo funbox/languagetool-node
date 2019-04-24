@@ -7,7 +7,11 @@
 
 ## Установка
 
-Рекомендуется установить пакет глобально:
+Для работы `languagetool-node` требуется Java, скачать дистрибутив можно на сайте
+<https://www.java.com>.
+
+Рекомендуется установить пакет глобально, так как для работы будет скачан архив с LanguageTool
+(≈250 МБ) и распакован в директорию с пакетом.
 
 ```bash
 npm -g i @funboxteam/languagetool-node
@@ -15,16 +19,16 @@ npm -g i @funboxteam/languagetool-node
 
 ## Использование
 
-`languagetool-node` может производить проверку файлов (.txt и .md), директорий и текста переданного в STDIN.
+`languagetool-node` может производить проверку файлов, директорий и текста переданного в STDIN.
 
 Проверка нескольких файлов:
 ```bash
 languagetool-node README.md CHANGELOG.md
 ```
 
-Проверка директории (рекурсивно):
+Проверка директории по маске:
 ```bash
-languagetool-node ~/Sites
+languagetool-node ~/project1/**/*.txt ~/project2/*.md
 ```
 
 Проверка текста из STDIN:
