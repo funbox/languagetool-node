@@ -1,5 +1,5 @@
 # Changelog
 
-## 0.1.0 (dd.mm.yyyy)
+## 1.0.0 (26.04.2019)
 
 * Init version.
