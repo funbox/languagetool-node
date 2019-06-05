@@ -69,7 +69,7 @@ async function check(vfiles) {
         const ctx = match.context;
         const badWord = ctx.text.slice(ctx.offset, ctx.offset + ctx.length);
 
-        return appConfig.ignore.some(goodWord => !RegExp(`^${goodWord}$`, 'i').test(badWord));
+        return !appConfig.ignore.some(goodWord => RegExp(`^${goodWord}$`, 'i').test(badWord));
       });
 
       if (filteredMatches.length) {
