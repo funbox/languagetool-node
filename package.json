@@ -12,6 +12,12 @@
   "bin": {
     "languagetool-node": "./index.js"
   },
+  "files": [
+    "lib/",
+    ".languagetoolrc.js",
+    "index.js",
+    "install.js"
+  ],
   "scripts": {
     "lint": "eslint --cache ./",
     "postinstall": "node install.js",
