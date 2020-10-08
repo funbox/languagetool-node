@@ -2,6 +2,12 @@
   "name": "@funboxteam/languagetool-node",
   "version": "1.0.1",
   "description": "Node.js wrapper for LanguageTool",
+  "license": "MIT",
+  "author": "Andrey Ivanov (https://github.com/343dev)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/funbox/languagetool-node"
+  },
   "main": "index.js",
   "bin": {
     "languagetool-node": "./index.js"
