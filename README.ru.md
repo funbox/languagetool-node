@@ -93,4 +93,8 @@ module.exports = {
 };
 ```
 
+## Благодарности
+
+Картинку для проекта нарисовали [Сергей Мыльников](https://www.behance.net/s_mylnikov) и [Игорь Гарибальди](https://pandabanda.com/).
+
 [![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)

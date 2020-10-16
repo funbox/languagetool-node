@@ -99,4 +99,8 @@ module.exports = {
 };
 ```
 
+## Credits
+
+The picture for the project was made by [Sergey Mylnikov](https://www.behance.net/s_mylnikov) & [Igor Garybaldi](https://pandabanda.com/).
+
 [![Sponsored by FunBox](https://funbox.ru/badges/sponsored_by_funbox_centered.svg)](https://funbox.ru)
