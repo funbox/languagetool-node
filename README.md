@@ -1,5 +1,8 @@
 # @funboxteam/languagetool-node
 
+<img align="right" width="192" height="192"
+     src="./logo.png">
+
 [![npm](https://img.shields.io/npm/v/@funboxteam/languagetool-node.svg)](https://www.npmjs.com/package/@funboxteam/languagetool-node)
 
 CLI spell and grammar checker. 

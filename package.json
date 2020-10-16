@@ -16,7 +16,8 @@
     "lib/",
     ".languagetoolrc.js",
     "index.js",
-    "install.js"
+    "install.js",
+    "logo.png"
   ],
   "scripts": {
     "lint": "eslint --cache ./",
