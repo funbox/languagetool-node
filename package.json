@@ -25,6 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@funboxteam/diamonds": "6.6.0",
     "@funboxteam/free-port-finder": "3.1.0",
     "axios": "0.18.0",
     "deepmerge": "3.2.0",
