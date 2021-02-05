@@ -1,6 +1,6 @@
 {
   "name": "@funboxteam/languagetool-node",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Node.js wrapper for LanguageTool",
   "license": "MIT",
   "author": "Andrey Ivanov (https://github.com/343dev)",
@@ -25,7 +25,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "axios": "0.18.0",
+    "@funboxteam/diamonds": "6.6.0",
+    "@funboxteam/free-port-finder": "3.1.0",
+    "axios": "0.21.1",
     "deepmerge": "3.2.0",
     "node-stream-zip": "1.8.0",
     "ora": "3.4.0",
