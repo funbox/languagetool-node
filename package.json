@@ -22,6 +22,7 @@
   "scripts": {
     "lint": "eslint --cache ./",
     "postinstall": "node install.js",
+    "prepublishOnly": "lawyer",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
