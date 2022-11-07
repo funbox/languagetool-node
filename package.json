@@ -22,7 +22,7 @@
   "scripts": {
     "lint": "eslint --cache ./",
     "postinstall": "node install.js",
-    "prepublishOnly": "lawyer",
+    "prepublishOnly": "if [ -z \"$CI\" ]; then lawyer; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
