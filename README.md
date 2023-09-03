@@ -1,3 +1,7 @@
+# ⛔ THIS REPO IS UNMAINTAINED
+
+Future development moved to <https://github.com/343dev/languagetool-node>.
+
 # @funboxteam/languagetool-node
 
 <img align="right" width="192" height="192"

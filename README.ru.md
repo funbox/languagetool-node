@@ -1,3 +1,7 @@
+# ⛔ РЕПОЗИТОРИЙ НЕ ПОДДЕРЖИВАЕТСЯ
+
+Разработка будет продолжена в репозитории <https://github.com/343dev/languagetool-node>.
+
 # @funboxteam/languagetool-node
 
 <img align="right" width="192" height="192"
